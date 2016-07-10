@@ -45,17 +45,34 @@ void onToggledGroup(int group, boolean toggle);
 ```
 
 If you want to get current group or child's status such as positions, call `getGroupIndex(int adapterPosition)` and `getChild(int adapterPosition)`. In generic case of adding/updating/deleting data and update views:
+
 Update group data.
+```
+GroupIndex groupIdx = getGroupIndex(holder.getAdapterPosition());
+if(groupIdx == null)
+  return;
+// Get group position by calling groupIdx.getPosition().
+// Get group's children index data by calling groupIdx.getChildren().
+// Get group's toggled status by calling groupIdx.isExpanded().
+// Use those info to update your data. Then call:
+notifyGroupInserted(int groupPosition, boolean expanded, int childrenCount);
+notifyGroupRangedInserted(int groupPositionStart, boolean[] expanded, int[] childrenCount);
+notifyGroupRemoved(GroupIndex groupIndexStart);
+notifyGroupRangedRemoved(GroupIndex groupIndexStart, int itemCount);
+```
 
 Update child data.
 ```
-ChildIndex childIdx = getChildIndex(holder.getAdapterPosition())
-// Get child position by calling childIdx.getPosition.
-// Get child's group index data by calling childIdx.getGroup.
-// Use those info to update your data. Then call:
-notifyChildRemoved(childIdx);
-// Or
-notifyChildRangeRemoved(childIdx, deleteItemCount);
+ChildIndex childIdx = getChildIndex(holder.getAdapterPosition());
+if(childIdx == null)
+  return;
+// Get child position by calling childIdx.getPosition().
+// Get child's group index data by calling childIdx.getGroup().
+// Use those info to update your data. Then call one of these:
+notifyChildInserted(int groupPosition, int childPosition);
+notifyChildRangedInserted(int groupPosition, int childPositionStart, int itemCount);
+notifyChildRemoved(ChildIndex childIndex);
+notifyChildRangeRemoved(ChildIndex childIndexStart, int itemCount);
 
 ```
 
