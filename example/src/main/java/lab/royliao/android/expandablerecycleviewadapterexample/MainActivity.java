@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mLstPopWin = new ListPopupWindow(this);
+        mLstPopWin.setModal(true);
 
         mRv = (RecyclerView) findViewById(R.id.rv);
 
