@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">ExpandableRecycleView Example</string>
+    <string name="app_name">ExpandableRecycleViewAdapter Example</string>
     <string name="action_settings">Settings</string>
 </resources>
